@@ -4,6 +4,15 @@ $filaAlta = [];
 $filaMedia = [];
 $filaBaixa = [];
 
+function inserirTarefaManual(&$alta, &$media, &$baixa) {
+    $descricao = readline("Digite a descrição da tarefa: ");
+    $data = readline("Digite a data da tarefa (AAAA-MM-DD): ");
+    $prioridade = readline("Digite a prioridade (alta, media ou baixa): ");
+
+    adicionarTarefa($alta, $media, $baixa, $descricao, $data, $prioridade);
+    echo "Tarefa adicionada!!!\n";
+}
+
 function adicionarTarefa(&$alta, &$media, &$baixa, $descricao, $data, $prioridade) {
     $tarefa = [
         'descricao' => $descricao,
@@ -33,16 +42,20 @@ function listarTarefas($fila, $prioridadeNome) {
     }
 }
 
+while (true) {
+    inserirTarefaManual($filaAlta, $filaMedia, $filaBaixa);
 
-
-adicionarTarefa($filaAlta, $filaMedia, $filaBaixa, 'Comprar pão', '2025-05-29', 'media');
-adicionarTarefa($filaAlta, $filaMedia, $filaBaixa, 'Fazer exercícios', '2025-05-30', 'alta');
-adicionarTarefa($filaAlta, $filaMedia, $filaBaixa, 'Limpar caixa de água', '2025-06-10', 'baixa');
-
+    $continuar = readline("Adicionar outra tarefa? (s/n): ");
+    if (strtolower($continuar) != 's') {
+        break;
+    }
+}
 
 listarTarefas($filaAlta, 'alta');
 listarTarefas($filaMedia, 'media');
 listarTarefas($filaBaixa, 'baixa');
+
+
 
 
 
