@@ -43,17 +43,35 @@ function listarTarefas($fila, $prioridadeNome) {
 }
 
 while (true) {
-    inserirTarefaManual($filaAlta, $filaMedia, $filaBaixa);
+    echo "\n--- MENU TAREFAS ---\n";
+    echo "1 - Adicionar tarefa\n";
+    echo "2 - Listar tarefas\n";
+    echo "3 - Sair\n";
+    $opcao = readline("Escolha uma opção: ");
 
-    $continuar = readline("Adicionar outra tarefa? (s/n): ");
-    if (strtolower($continuar) != 's') {
-        break;
+        switch ($opcao) {
+            case '1':
+                inserirTarefaManual($filaAlta, $filaMedia, $filaBaixa);
+                break;
+            
+            case '2':
+                listarTarefas($filaAlta, 'alta');
+                listarTarefas($filaMedia, 'media');
+                listarTarefas($filaBaixa, 'baixa');
+                break;
+
+            case '3':
+            case 's':
+            case 'S':
+                echo "Tchauu...\n";
+                break 2; 
+            
+            default:
+                echo "Opção inválida!\n";
+                break;
     }
 }
 
-listarTarefas($filaAlta, 'alta');
-listarTarefas($filaMedia, 'media');
-listarTarefas($filaBaixa, 'baixa');
 
 
 
